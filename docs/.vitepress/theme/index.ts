@@ -10,7 +10,7 @@ import globals from '../globals'
 export default {
     ...DefaultTheme,
 
-    enhanceApp: async ({app, Vue}) => {
+    enhanceApp: async ({app}) => {
         // window._AMapSecurityConfig = {
         //     securityJsCode: '530231bc60a6258f7fa6b84d5d532761',
         // }
@@ -18,13 +18,5 @@ export default {
         // custom router. `siteData`` is a `ref`` of current site-level metadata.
         app.use(elementplus)
         app.use(globals)
-        app.mixin({
-            async mounted() {
-                // import('@amap/amap-jsapi-loader').then(module => {
-                //     Vue.use(module.default)
-                // })
-
-            }
-        })
     },
 }
