@@ -19,7 +19,7 @@ import {
 } from '@element-plus/icons-vue'
 import {getModule} from '../../../utils/module'
 import {$message} from '../../../utils/message'
-import {initMap} from '../../../../../packages'
+// import {initMap} from '../../../../../packages'
 
 interface PropsType {
     description?: string
@@ -179,7 +179,6 @@ const copyCode = async () => {
                         <vue-live
                             v-if="editDialogVisible"
                             :code="decodeRawSource"
-                            :requires="{'@dinert/amap': {initMap}}"
                             @error="(e) => console.error('Error on first example', e)"
                         />
                     </div>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref} from 'vue'
-import {initMap} from '../../../packages'
+// import {initMap} from '../../../packages'
 
 const mapRef = ref<any>()
 
@@ -15,14 +15,14 @@ const mapRef = ref<any>()
 // })
 
 onMounted(() => {
-    initMap(mapRef.value, {
-        center: [113.533339, 22.794258],
-        zooms: [3, 18],
-        zoom: 11.5,
-        viewMode: '3D',
-    }, {
-        version: '2.0'
-    })
+    // initMap(mapRef.value, {
+    //     center: [113.533339, 22.794258],
+    //     zooms: [3, 18],
+    //     zoom: 11.5,
+    //     viewMode: '3D',
+    // }, {
+    //     version: '2.0'
+    // })
 })
 
 
