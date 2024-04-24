@@ -4,6 +4,7 @@ import AMapLoader from '@amap/amap-jsapi-loader'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 let mapCache: any = null
+let amapCache = null
 
 export type InitAmapOptions = Partial<Parameters<typeof AMapLoader.load>[0]> & Partial<{securityJsCode: string, before?: (options: InitAmapOptions) => void}>
 
@@ -17,17 +18,13 @@ export const initAmap = (options: InitAmapOptions = {}): Promise<(typeof AMap)> 
 
     let newOptions = lodash.defaultsDeep(lodash.cloneDeep(options), defaultOptions)
 
-    if (window.amapCache) {
+    if (amapCache) {
         // delete newOptions.key
-    } else {
-        window._AMapSecurityConfig = {
-            securityJsCode: options.securityJsCode || '530231bc60a6258f7fa6b84d5d532761',
-        }
     }
     return new Promise((resolve, reject) => {
         newOptions = newOptions.before && newOptions.before(newOptions) || newOptions
         AMapLoader.load(newOptions).then(Amap => {
-            window.amapCache = Amap
+            amapCache = Amap
             resolve(Amap as (typeof AMap))
         }).catch(e => reject(e))
     })
