@@ -1,0 +1,1 @@
+import{d as n,j as o,k as a,o as t,c as r}from"./framework.BLc8f-zo.js";const _=n({__name:"index",setup(s){const e=o();return a(()=>{}),(c,f)=>(t(),r("div",{ref_key:"mapRef",ref:e},null,512))}});export{_ as default};
