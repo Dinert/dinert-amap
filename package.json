@@ -7,8 +7,7 @@
         "build": "vite build",
         "docs:dev": "cd docs && yarn dev",
         "docs:build": "cd docs && yarn build",
-        "docs:preview": "cd docs && yarn preview",
-        "prepare": "husky install"
+        "docs:preview": "cd docs && yarn preview"
     },
     "keywords": [
         "@dinert/amap",
