@@ -5,8 +5,31 @@
 
 ## 引入
 
-> App.vue
->
+### Vue2
+```html
+<template>
+    <div id="map" class="map"></div>
+</template>
+
+<script>
+import {initMap} from '@dinert/amap'
+export default {
+    mounted() {
+        initMap('map', {
+            center: [113.533339, 22.794258],
+            zooms: [3, 18],
+            zoom: 11.5,
+            viewMode: '3D',
+        }, {
+            version: '2.0'
+        })
+    }
+}
+</script>
+
+```
+
+### Vue3
 ```html
 <script setup lang="ts">
 import {onMounted, ref} from 'vue'
@@ -23,7 +46,6 @@ onMounted(async () => {
         version: '2.0'
     })
 })
-
 
 </script>
 
