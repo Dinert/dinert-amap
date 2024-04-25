@@ -8,11 +8,11 @@
 # 选择一个你喜欢的包管理器
 
 # NPM
-$ npm install @amap/amap-jsapi-loader @amap/amap-jsapi-types
+$ npm install @amap/amap-jsapi-loader @amap/amap-jsapi-types lodash
 
 # Yarn
-$ yarn add @amap/amap-jsapi-loader @amap/amap-jsapi-types
+$ yarn add @amap/amap-jsapi-loader @amap/amap-jsapi-types lodash
 
 # pnpm
-$ pnpm install @amap/amap-jsapi-loader @amap/amap-jsapi-types
+$ pnpm install @amap/amap-jsapi-loader @amap/amap-jsapi-types lodash
 ```

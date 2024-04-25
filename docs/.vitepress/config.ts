@@ -39,6 +39,10 @@ export default defineConfig({
                             text: '安装',
                             link: '/guide/installation'
                         },
+                        {
+                            text: '快速开始',
+                            link: '/guide/quickstart'
+                        },
 
                     ]
                 },

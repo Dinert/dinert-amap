@@ -23,10 +23,21 @@ export const mdPlugin = md => {
                         'utf-8'
                     )
                 }
+                const str = 'import {useData} from \'vitepress\''
+                const str2 = 'import useMapStyle from \'../../hooks/useMapStyle\''
+                const str3 = 'const {isDark} = useData()'
+                const str4 = '.then(map => useMapStyle(map, isDark))'
+                let demoSource = source.replace(str, '')
+                demoSource = demoSource.replace(str2, '')
+                demoSource = demoSource.replace(str3, '')
+                demoSource = demoSource.replace(str4, '')
+
                 // eslint-disable-next-line max-statements-per-line
                 if (!source) {throw new Error(`Incorrect source file: ${sourceFile}`)}
                 return `<DinertDemo source="${encodeURIComponent(
                     highlight(source, 'vue')
+                )}" demoSource="${encodeURIComponent(
+                    highlight(demoSource, 'vue')
                 )}" path="${sourceFile}" raw-source="${encodeURIComponent(
                     source
                 )}" description="${encodeURIComponent(localMd.render(description))}">`

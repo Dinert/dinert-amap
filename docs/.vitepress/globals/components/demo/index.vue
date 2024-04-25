@@ -19,12 +19,14 @@ import {
 } from '@element-plus/icons-vue'
 import {getModule} from '../../../utils/module'
 import {$message} from '../../../utils/message'
+import {useData} from 'vitepress'
 
 interface PropsType {
     description?: string
     path: string
     rawSource?: string
     source?: string
+    demoSource?: string
 }
 
 const props = withDefaults(defineProps<PropsType>(), {
@@ -32,36 +34,57 @@ const props = withDefaults(defineProps<PropsType>(), {
     rawSource: '',
     source: ''
 })
+const viteData = useData()
+
 const preRequiredObjects = ref({})
 if (typeof window !== 'undefined') {
     import('../../../../../packages').then(module => {
-        preRequiredObjects.value['@dinert/amap'] = {...module}
+        preRequiredObjects.value['@dinert/amap'] = {
+            ...module,
+            initMap: (id: Parameters<typeof module.initMap>[0], options: Parameters<typeof module.initMap>[1], amapOptions: Parameters<typeof module.initMap>[2]) => {
+                options.mapStyle = viteData.isDark.value ? 'amap://styles/darkblue' : 'amap://styles/normal'
+                return module.initMap(id, options, amapOptions)
+            }
+        }
     })
 }
 
 
-const {description, source, rawSource} = toRefs(props)
+const {description, rawSource, demoSource} = toRefs(props)
 const demoComponents = shallowRef()
 const sourceVisible = ref(false)
 const editDialogVisible = ref(false)
 
 const packagesReg = /\.\.\/.*?packages/g
+const str = 'import {useData} from \'vitepress\''
+const str2 = 'import useMapStyle from \'../../hooks/useMapStyle\''
+const str3 = 'const {isDark} = useData()'
+const str4 = '.then(map => useMapStyle(map, isDark))'
 
 onMounted(async () => {
     demoComponents.value = defineAsyncComponent(getModule(props.path))
 })
 
 const {isSupported, copy} = useClipboard({
-    source: decodeURIComponent(rawSource.value),
+    source: () => {
+        let result = rawSource.value
+        result = result.replace(str, '')
+        result = result.replace(str2, '')
+        result = result.replace(str3, '')
+        result = result.replace(str4, '')
+        return decodeURIComponent(result)
+    },
 })
 
-const decodedDescription = computed(() =>
-    decodeURIComponent(description.value)
-)
+const decodedDescription = computed(() => {
+    const result = decodeURIComponent(description.value)
+    return result
+})
 
 const decodeSource = computed(() => {
-    let result = decodeURIComponent(source.value)
+    let result = decodeURIComponent(demoSource.value as any)
     result = result.replace(packagesReg, '@dinert/amap')
+
     return result
 })
 
@@ -72,6 +95,10 @@ const decodeRawSource = computed(() => {
     }
     // result = result.replace(packagesLine, '');
     result = result.replace(packagesReg, '@dinert/amap')
+    result = result.replace(str, '')
+    result = result.replace(str2, '')
+    result = result.replace(str3, '')
+    result = result.replace(str4, '')
 
     return result
 })
@@ -82,6 +109,11 @@ const decodeCodeRawSource = computed(() => {
         result = result.split('\n').join('')
     }
     result = result.replace(packagesReg, '@dinert/amap')
+    result = result.replace(str, '')
+    result = result.replace(str2, '')
+    result = result.replace(str3, '')
+    result = result.replace(str4, '')
+
     return result
 })
 
