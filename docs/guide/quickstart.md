@@ -12,7 +12,11 @@
 </template>
 
 <script>
+import '@amap/amap-jsapi-types' // ts支持
 import {initMap} from '@dinert/amap'
+window._AMapSecurityConfig = {
+    securityJsCode: 'xxx'
+}
 export default {
     mounted() {
         initMap('map', {
@@ -32,8 +36,13 @@ export default {
 ### Vue3
 ```html
 <script setup lang="ts">
+import '@amap/amap-jsapi-types'  // ts支持
 import {onMounted, ref} from 'vue'
 import {initMap} from '@dinert/amap'
+
+window._AMapSecurityConfig = {
+    securityJsCode: 'xxx'
+}
 
 const mapRef = ref<any>()
 onMounted(async () => {
