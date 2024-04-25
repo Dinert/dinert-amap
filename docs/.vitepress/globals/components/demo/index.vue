@@ -19,7 +19,6 @@ import {
 } from '@element-plus/icons-vue'
 import {getModule} from '../../../utils/module'
 import {$message} from '../../../utils/message'
-// import {initMap} from '../../../../../packages'
 
 interface PropsType {
     description?: string
@@ -33,6 +32,13 @@ const props = withDefaults(defineProps<PropsType>(), {
     rawSource: '',
     source: ''
 })
+const preRequiredObjects = ref({})
+if (typeof window !== 'undefined') {
+    import('../../../../../packages').then(module => {
+        preRequiredObjects.value['@dinert/amap'] = {...module}
+    })
+}
+
 
 const {description, source, rawSource} = toRefs(props)
 const demoComponents = shallowRef()
@@ -179,6 +185,7 @@ const copyCode = async () => {
                         <vue-live
                             v-if="editDialogVisible"
                             :code="decodeRawSource"
+                            :requires="preRequiredObjects"
                             @error="(e) => console.error('Error on first example', e)"
                         />
                     </div>
