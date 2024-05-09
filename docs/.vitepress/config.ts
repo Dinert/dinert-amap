@@ -28,7 +28,7 @@ export default defineConfig({
             {text: '使用', link: '/examples/init'},
         ],
         socialLinks: [
-            {icon: 'github', link: 'https://github.com/Dinert/dinert-element-plus'},
+            {icon: 'github', link: 'https://github.com/Dinert/dinert-amap'},
         ],
         sidebar: {
             '/guide/': [
